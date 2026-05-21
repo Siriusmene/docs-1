@@ -15,6 +15,7 @@ Visual Editor v3 includes runtime settings that let you control when an experime
 - **Disable Auto Run** prevents Sidecar from automatically attempting to run the experiment on page load.
 - **Custom activation** lets you start the experiment manually with `StatsigSidecar.activateExperiment("experiment_name")`.
 - **Prerun Script** lets you define a custom script that runs once before the experiment starts when the targeting rules pass. Use this to bind listeners or evaluate custom logic before manually activating the experiment.
+
 ## Advanced Targeting & Segmentation
 This approach allows you to set User Identity and Attributes for Sidecar, enabling you to perform more advanced targeting and results segmentation. 
 
@@ -30,8 +31,26 @@ window.statsigUser = {
 }
 ```
 
-## Accessing the Statsig js client
-For accessing the underlying Statsig js client instance, you can call `StatsigSidecar.getStatsigInstance()`.
+## Available Sidecar methods
+
+Sidecar exposes a small runtime API on `window.StatsigSidecar` for manual activation, manual event logging, and access to the underlying Statsig JavaScript client. After Sidecar initializes, `StatsigSidecar.getStatsigInstance()` returns the underlying client.
+
+```js
+// Start a Visual Editor experiment manually when Disable Auto Run is enabled
+StatsigSidecar.activateExperiment("experiment_name");
+
+// Log a custom event
+StatsigSidecar.logEvent("event_name", null, {
+  metadata_key: "metadata_value",
+});
+
+// Access the underlying Statsig JavaScript client after Sidecar initializes
+window.postExperimentCallback = function () {
+  const client = StatsigSidecar.getStatsigInstance();
+  const config = client.getDynamicConfig("config_name");
+  const context = client.getContext();
+};
+```
 
 ## Configuring Runtime Options
 This allows you to handle Consent Management, GDPR compliance and more. All of the [StatsigOptions](/client/javascript-sdk/#statsig-options) provided by the JavaScript SDK are also fully-supported with Sidecar. These can be passed to Sidecar via:
