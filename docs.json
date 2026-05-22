@@ -913,8 +913,7 @@
                     ]
                   }
                 ]
-              },
-              "access-management/pricing"
+              }
             ]
           },
           {
@@ -1141,6 +1140,10 @@
     ]
   },
   "redirects": [
+    {
+      "source": "/access-management/pricing",
+      "destination": "/access-management/introduction"
+    },
     {
       "source": "/pulse",
       "destination": "/experiments/interpreting-results/read-results"
