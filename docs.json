@@ -834,7 +834,7 @@
               "console-api/introduction",
               {
                 "group": "API reference",
-                "openapi": "https://api.statsig.com/openapi/20240601.json"
+                "openapi": "console-api/consoleopenapi.json"
               }
             ]
           },
