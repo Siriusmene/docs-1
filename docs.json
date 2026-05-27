@@ -1485,10 +1485,6 @@
       "destination": "/metrics/raw-event-metrics"
     },
     {
-      "source": "/console-api/*",
-      "destination": "/console-api/introduction"
-    },
-    {
       "source": "/stats-engine/methodologies/cuped",
       "destination": "/experiments/statistical-methods/methodologies/cuped"
     },
