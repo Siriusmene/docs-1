@@ -368,19 +368,6 @@
           "description": "Logs one or more custom events for analytics and metric calculation. Events are used to measure experiment outcomes and user behavior.",
           "operationId": "logEvent",
           "tags": ["Events"],
-          "parameters": [
-            {
-              "name": "STATSIG-CLIENT-TIME",
-              "in": "header",
-              "required": false,
-              "description": "Client timestamp in milliseconds. Used to normalize event timestamps against server time and account for client clock drift.",
-              "schema": {
-                "type": "integer",
-                "format": "int64"
-              },
-              "example": 1616826986211
-            }
-          ],
           "requestBody": {
             "required": true,
             "content": {
