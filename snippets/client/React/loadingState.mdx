@@ -1,28 +1,11 @@
 ## Loading State
 
-Wait for the latest values during initialization with either the provider or the async hook.
+On a fresh page load with no cached values in `localStorage` (for example, an incognito window or a first visit), `isClientLoading` from `useStatsigClient` stays `true` until the SDK finishes fetching values from the network.
+
+The recommended pattern is to initialize with `useClientAsyncInit` and pass the client to `StatsigProvider`, so your app waits for the initial fetch before rendering. Passing a `loadingComponent` directly to `StatsigProvider` is an equivalent shorthand.
 
 <Tabs>
-  <Tab title="StatsigProvider">
-
-```tsx
-import { StatsigProvider } from '@statsig/react-bindings';
-
-export function App() {
-  return (
-    <StatsigProvider
-      sdkKey="client-KEY"
-      user={{ userID: 'a-user' }}
-      loadingComponent={<div>Loading...</div>}
-    >
-      <YourComponent />
-    </StatsigProvider>
-  );
-}
-```
-
-  </Tab>
-  <Tab title="useClientAsyncInit">
+  <Tab title="useClientAsyncInit (recommended)">
 
 ```tsx
 import { StatsigProvider, useClientAsyncInit } from '@statsig/react-bindings';
@@ -39,6 +22,25 @@ export function App() {
 
   return (
     <StatsigProvider client={client}>
+      <YourComponent />
+    </StatsigProvider>
+  );
+}
+```
+
+  </Tab>
+  <Tab title="StatsigProvider">
+
+```tsx
+import { StatsigProvider } from '@statsig/react-bindings';
+
+export function App() {
+  return (
+    <StatsigProvider
+      sdkKey="client-KEY"
+      user={{ userID: 'a-user' }}
+      loadingComponent={<div>Loading...</div>}
+    >
       <YourComponent />
     </StatsigProvider>
   );
